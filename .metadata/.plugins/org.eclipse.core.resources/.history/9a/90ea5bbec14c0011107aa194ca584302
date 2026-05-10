@@ -1,0 +1,17 @@
+package com.jpa.nplus1.repo;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.jpa.nplus1.entity.Customer;
+
+public interface CustomerRepo extends JpaRepository<Customer,Long>{
+	
+	@Override
+	@EntityGraph(attributePaths="addresses")
+	List<Customer> findAll();
+	
+
+}

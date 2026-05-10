@@ -1,0 +1,5 @@
+spring.application.name=NOnePlusOneJPAIssue
+
+server.port=9898
+
+#Mysql driver details

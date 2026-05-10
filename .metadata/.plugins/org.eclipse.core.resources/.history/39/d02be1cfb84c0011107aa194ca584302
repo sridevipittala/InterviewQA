@@ -1,0 +1,5 @@
+package com.jpa.nplus1.repo;
+
+public interface CustomerRepo {
+
+}

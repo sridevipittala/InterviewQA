@@ -1,0 +1,30 @@
+JPA N+1 problem
+---------------
+The N+1 query problem is a performance issue where the database is called N+1 times to retrieve 
+a set of objects, rather than using a single query.
+1 Query: The initial query to fetch the "parent" entities (e.g., SELECT * FROM Customer).
+N Queries: For every "N" parent retrieved, JPA executes an additional separate query to fetch 
+its "child" entities.
+(e.g., SELECT * FROM Address WHERE customer_id = ?) because the relationship is loaded lazily.)
+
+How to Solve It
+ 
+You should mention:
+1).Join Fetch (JPQL): Using JOIN FETCH in your query to pull parents and children in one SQL JOIN.
+2).Entity Graphs: Using the @EntityGraph annotation to specify which relationships to load eagerly 
+for a specific method.
+3).By default entity class loading is Lazy which means it loads parent classes first and
+loads hild class where ever required
+
+If we change to Eager loadg the also it solves JPA N+1 problem.
+
+@OneToMany(mappedBy="customer",cascade=CascadeType.ALL
+			,orphanRemoval=true,fetch=FetchType.EAGER)
+	//FetchType.Eager also solves JPA N+1 issues
+	//By default FetchType.Lazy then it won't load child at the beginning
+	//It hits the DB N+1 times
+	
+	@JsonManagedReference
+	private List<Address> addresses;
+
+*****Explain lazy loading issue and solutions like JOIN FETCH and EntityGraph.

@@ -1,0 +1,26 @@
+package com.jpa.nplus1.repo;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.jpa.nplus1.entity.Customer;
+
+public interface CustomerRepo extends JpaRepository<Customer,Long>{
+	@EntityGraph(attributePaths="addresses")
+	// This tells JPA to fetch the "addresses" collection in the same query	 
+	/*Hibernate: select c1_0.id,a1_0.customer_id,a1_0.id,a1_0.city,a1_0.house_number,a1_0.phone_number,
+	 * a1_0.state,a1_0.street,a1_0.zip_code,c1_0.name,c1_0.phone_number 
+	 * from customer c1_0 left join address a1_0 on c1_0.id=a1_0.customer_id
+	 * 
+	 * Istread of hitting DB N+1 times ,hits one time
+	*/
+	//List<Customer> findAll();
+	
+	@Query("SELECT c FROM Customer c LEFT JOIN FETCH c.addresses") 
+	//It also solves N+1 issues
+	List<Customer> findAll();
+
+}
