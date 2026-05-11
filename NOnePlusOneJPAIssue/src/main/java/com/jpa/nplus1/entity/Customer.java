@@ -25,7 +25,8 @@ public class Customer {
 	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL
 			,orphanRemoval=true,fetch=FetchType.EAGER)
 	//FetchType.Eager also solves JPA N+1 issues
-	//By default FetchType.Lazy
+	//By default FetchType.Lazy then it won't load child at the beginning
+	//It hits the DB N+1 times
 	
 	@JsonManagedReference
 	private List<Address> addresses;

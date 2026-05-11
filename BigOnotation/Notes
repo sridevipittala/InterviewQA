@@ -1,0 +1,10 @@
+Big O notation
+---------------
+Big O notation is a way to measure the time and space complexity of an algorithm
+
+O(1) - Constant (Fastest, e.g., accessing an array by index)
+O(log N) - Logarithmic (e.g., Binary Search)
+if an array has 8 element which  2^3 the O(LogN)=3  default log base is 2
+O(N) - Linear (e.g., A simple for loop)
+O(N log N) - Linearithmic (e.g., Most efficient sorting)
+O(N²) - Quadratic (Slow, e.g., Nested for loops)
